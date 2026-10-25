@@ -54,6 +54,21 @@ describe('DocumentationService filesystem integration', () => {
     })
   })
 
+  it('accepts Git checkouts with Windows line endings', async () => {
+    fs.writeFileSync(path.join(routeDirectory, 'health.ts'), "route.get('/health', handler)")
+    const service = new DocumentationService({ repositoryRoot })
+
+    await service.sync({ title: 'API Reference' })
+    const outputPath = path.join(repositoryRoot, 'docs', 'api-reference.md')
+    const output = fs.readFileSync(outputPath, 'utf8')
+    fs.writeFileSync(outputPath, output.replace(/\n/g, '\r\n'))
+
+    await expect(service.check({ title: 'API Reference' })).resolves.toMatchObject({
+      status: 'up-to-date',
+      routeCount: 1
+    })
+  })
+
   it('fails explicitly when the route source is missing', async () => {
     rimraf.sync(routeDirectory)
     const service = new DocumentationService({ repositoryRoot })
