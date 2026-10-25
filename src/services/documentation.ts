@@ -146,7 +146,8 @@ export default class DocumentationService {
       return undefined
     }
 
-    return fs.promises.readFile(this.outputFile, 'utf8')
+    const content = await fs.promises.readFile(this.outputFile, 'utf8')
+    return content.replace(/\r\n/g, '\n')
   }
 
   private async findTypeScriptFiles (directory: string): Promise<string[]> {
