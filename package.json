@@ -8,7 +8,10 @@
     "build": "tsc",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "docs:sync": "ts-node src/scripts/documentation-sync.ts",
+    "docs:check": "ts-node src/scripts/documentation-sync.ts --check",
+    "verify": "npm run build && npm run lint && npm test -- --runInBand && npm run docs:check"
   },
   "keywords": [
     "Node.js",

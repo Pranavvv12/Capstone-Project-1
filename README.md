@@ -1,8 +1,41 @@
-# Express REST API - Node.JS + TypeScript
+# Automated Documentation Sync - Express REST API
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![node](https://img.shields.io/node/v/express) [![TypeScript](https://badges.frapsoft.com/typescript/version/typescript-next.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
 
 Structure for node.js projects involving typescript
+
+This capstone extends the starter API with an Agentic SDLC workflow that keeps
+the committed API reference synchronized with static Express route definitions.
+See `requirements.md`, `architecture.md`, `design-review.md`, and `impl-plan.md`
+for the approved delivery artifacts.
+
+## Documentation synchronization
+
+Update the generated API reference:
+
+```sh
+npm run docs:sync
+```
+
+Verify that the committed reference is current without modifying it:
+
+```sh
+npm run docs:check
+```
+
+The server also exposes `POST /api/documentation/sync` with:
+
+```json
+{
+  "title": "API Reference"
+}
+```
+
+Run the complete build, lint, test, and documentation check:
+
+```sh
+npm run verify
+```
 
 ## Getting Started
 
